@@ -1,4 +1,4 @@
-# zikucar-ui
+# zikucar-vue-ui
 
 #### Description
 vue2.0+elementUi书写的后台管理系统
