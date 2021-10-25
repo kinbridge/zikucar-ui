@@ -20,7 +20,7 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-button @click="addThinkBaseInfo" type="primary">新增</el-button>
+      <el-button @click="addThinkType" type="primary">新增类型</el-button>
       <el-button @click="getData" type="primary" icon="el-icon-refresh">刷新</el-button>
     </el-row>
     <el-table :data="tableData" ref="table" style="width: 100%">
@@ -31,25 +31,16 @@
         </template>
       </el-table-column>
       <el-table-column class="text-overflow"
-                       :show-overflow-tooltip="true" prop="thinkTypeId" label="产品类型" :formatter="thinkTypeFormatter">
+                       :show-overflow-tooltip="true" prop="thinkCode" label="类型编码">
       </el-table-column>
       <el-table-column class="text-overflow"
-                       :show-overflow-tooltip="true" prop="thinkName" label="产品名称">
-      </el-table-column>
-      <el-table-column class="text-overflow"
-                       :show-overflow-tooltip="true" prop="title" label="产品标题">
-      </el-table-column>
-      <el-table-column class="text-overflow"
-                       :show-overflow-tooltip="true" prop="description" label="产品描述">
-      </el-table-column>
-      <el-table-column class="text-overflow"
-                       :show-overflow-tooltip="true" prop="href" label="产品超链接">
+                       :show-overflow-tooltip="true" prop="thinkType" label="产品类型" :formatter="thinkTypeFormatter">
       </el-table-column>
     </el-table>
     <el-pagination background layout="prev, pager, next"></el-pagination>
-    <!--    编辑框-->
-    <thinkBaseInfo-edit :dialogVisible="dialogVisible" v-if="dialogVisible" :params="params"
-                        @thinkBaseInfo-edit-close="thinkBaseInfoEditClose"></thinkBaseInfo-edit>
+    <!--     产品类型-->
+    <thinkType-edit :dialogVisible="dialogVisible" v-if="dialogVisible" :params="params"
+                    @thinkType-edit-close="thinkTypeEditClose"></thinkType-edit>
   </div>
 
 </template>
@@ -58,7 +49,7 @@ export default {
   data() {
     return {
       searArgs: {
-        thinkBaseInfoName: ''
+        thinkTypeName: ''
       },
       params: {
         pkId: "",
@@ -66,7 +57,7 @@ export default {
       },
       tableData: [],
       dialogVisible: false,//显示编辑框 addthinkType
-      thinkTypeVisible: false,//显示编辑框
+      dialogVisible: false,//显示编辑框
       thinkTypeOptions: []//产品类型
     }
   },
@@ -74,23 +65,7 @@ export default {
     this.getData()
   },
   methods: {
-    // 格式化产品类型
-    thinkTypeFormatter(row) {
-      for (let index in this.thinkTypeOptions) {
-        if (this.thinkTypeOptions[index].pkId === row.thinkTypeId) {
-          return this.thinkTypeOptions[index].thinkType;
-        }
-      }
-      return "";
-    },
-    initThinkTypeList() {
-      this.http.get(this.api.thinkType.list, res => {
-        this.thinkTypeOptions = res.data;
-      }, (error) => {
-        console.log("查询岗位信息错误-》" + error);
-      })
-    },
-    thinkBaseInfoEditClose() {
+    thinkTypeEditClose() {
       this.dialogVisible = false;
       this.getData();
     },
@@ -99,7 +74,7 @@ export default {
       this.params.operation = "修改";
       this.dialogVisible = true;
     },
-    addThinkBaseInfo() {
+    addThinkType() {
       this.params.pkId = "";
       this.params.operation = "新增";
       this.dialogVisible = true;
@@ -110,7 +85,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.http.get(this.api.thinkBaseInfo.deleteById + "/" + row.pkId, res => {
+        this.http.get(this.api.thinkType.deleteById + "/" + row.pkId, res => {
           if (res.code == 200) {
             this.$message({type: 'success', message: '删除成功!'});
             this.getData();
@@ -123,7 +98,7 @@ export default {
       });
     },
     getData() {
-      this.http.get(this.api.thinkBaseInfo.list, res => {
+      this.http.get(this.api.thinkType.list, res => {
         this.tableData = res.data;
       }, (error) => {
         console.log(error)
@@ -132,10 +107,10 @@ export default {
     },
   },
   components: {
-    "thinkBaseInfo-edit": thinkBaseInfoEdit,
+    "thinkType-edit": thinkTypeEdit
   }
 }
-import thinkBaseInfoEdit from "./thinkBaseInfoEdit.vue";
+import thinkTypeEdit from "./thinkTypeEdit.vue";
 </script>
 <style>
 .grid-content {

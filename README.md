@@ -31,6 +31,7 @@ npm run dev
     ├─register      #注册页面
     ├─repository    #无用的示例页面
     └─test          #无用的示例页面
+    
 ```
 ### API配置
 ``` javaScript
