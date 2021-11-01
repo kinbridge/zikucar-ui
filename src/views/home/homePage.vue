@@ -121,7 +121,7 @@ export default {
   width: 100%;
   height: 100%;
   /*background: url(../../../screenshot/background.jpg) no-repeat center 0*/
-  background-color: cornflowerblue;
+  background-color: #66b1ff;
 }
 
 #top {
@@ -132,7 +132,7 @@ export default {
 
 #top-first {
   width: 80%;
-  height: 10%;
+  height: 9%;
   margin: 0 15%;
 }
 
@@ -162,7 +162,7 @@ export default {
 }
 
 #center-left a {
-  height: 30px;
+  /*height: 30px;*/
   line-height: 30px;
   text-align: center;
   text-decoration: none;
@@ -184,7 +184,6 @@ li:hover {
   width: 100%;
   height: 62%;
   background-color: cornflowerblue;
-  opacity: 80%; /*透明度*/
   overflow: auto;
 }
 
