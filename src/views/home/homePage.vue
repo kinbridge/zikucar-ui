@@ -9,13 +9,13 @@
       <div id="top-nav">
         <ul class="firstNav" style="target: back">
           <li>
-            <a href="https://shop59110010.taobao.com/category.htm?spm=a1z10.1-c.w4010-14746013404.2.64d77f43KPd1jA&search=y">工作室介绍</a>
+            <a   @click="openThink" href="javascript:void(0);">工作室介绍</a>
           </li>
           <li>
-            <a href="https://shop59110010.taobao.com/category.htm?spm=a1z10.1-c.w4010-14746013404.2.64d77f43KPd1jA&search=y">关于我们</a>
+            <a  @click="openThink" href="javascript:void(0);">关于我们</a>
           </li>
           <li>
-            <a href="https://shop59110010.taobao.com/category.htm?spm=a1z10.1-c.w4010-14746013404.2.64d77f43KPd1jA&search=y">购买产品</a>
+            <a  @click="openThink" href="javascript:void(0);">购买产品</a>
           </li>
         </ul>
       </div>
@@ -30,17 +30,17 @@
         </ul>
       </div>
       <div id="center-right">
-        <div  v-for="item in attachList">
-          <el-col :span="8">
-<!--            <span style="width: 30%;text-align: center">{{ item.originName }}</span>-->
+        <div v-for="item in attachList">
+          <el-col :span="6">
             <el-image
+                style="height: 180px;"
                 :src="item.onlineUrl"
                 :alt="item.originName"
                 fil="fill"
                 @click="openTaBaoDetail(item.href)"
             >
             </el-image>
-
+            <span style="width:30%;text-align: center">{{ item.title }}</span>
           </el-col>
         </div>
       </div>
@@ -74,10 +74,10 @@ export default {
     this.initThinkTypeList();
   },
   methods: {
-    openThink(){
+    openThink() {
       window.open("https://shop59110010.taobao.com/category.htm?spm=a1z10.1-c.w4010-14746013404.2.64d77f43KPd1jA&search=y");
     },
-    openTaBaoDetail(href){
+    openTaBaoDetail(href) {
       window.open(href);
     },
     changeModel(id) {

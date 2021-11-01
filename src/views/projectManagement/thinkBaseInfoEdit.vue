@@ -76,7 +76,7 @@ export default {
   },
   mounted() {
     if (this.params.pkId) {
-      this.initthinkBaseInfo();
+      this.initThinkBaseInfo();
       console.log("thinkBaseInfo edit init");
     }
     this.initThinkTypeList();
@@ -104,7 +104,7 @@ export default {
         }
       });
     },
-    initthinkBaseInfo() {
+    initThinkBaseInfo() {
       this.http.get(this.api.thinkBaseInfo.getById + "/" + this.params.pkId, res => {
         this.thinkBaseInfoForm = res.data;
       }, (error) => {

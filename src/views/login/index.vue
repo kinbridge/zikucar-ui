@@ -34,6 +34,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  background: url(../../../screenshot/green.jpeg) no-repeat center 0
 }
 
 .login-panel {
@@ -106,10 +107,12 @@ export default {
                 this.$message({message: '登录成功！', type: 'success'});
                 this.$router.push({path: "/home/deptList"});
               }, 1000);
+            }else{
+              this.$message({message: '登录失败！'+res.message, type: 'error'});
             }
             this.loading = false;
           }, (error) => {
-            this.$message({message: '登录失败！' + error, type: 'error'});
+            this.$message({message: '登录失败！' + error.message, type: 'error'});
             console.log("登录失败-》" + error.msg);
             this.loading = false;
           })
