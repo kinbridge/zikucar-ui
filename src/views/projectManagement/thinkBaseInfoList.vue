@@ -7,10 +7,11 @@
             <el-col :span="24" style="padding: 15px; ">
               <el-row :gutter="20" style="background: #f4f4f5;padding:10px;">
                 <el-col :span="5">
-                  <el-input placeholder="产品信息名称" v-model="searArgs.checkName" size="small" clearable></el-input>
+                  <el-input placeholder="产品名称" v-model="pageQuery.thinkBaseInfo.thinkName"
+                            v-on:keyup.enter.native="getData" size="small" clearable></el-input>
                 </el-col>
                 <el-col :span="2" style="text-align: center;">
-                  <el-button type="success" icon="el-icon-search" size="small" circle></el-button>
+                  <el-button type="success" @click="getData"  icon="el-icon-search" size="small" circle></el-button>
                 </el-col>
               </el-row>
             </el-col>
@@ -67,14 +68,31 @@ export default {
       tableData: [],
       dialogVisible: false,//显示编辑框 addthinkType
       thinkTypeVisible: false,//显示编辑框
-      thinkTypeOptions: []//产品类型
+      thinkTypeOptions: [],//产品类型
+      pageQuery: {
+        page: 1,
+        size: 10,
+        thinkBaseInfo: {
+          thinkName: ""
+        }
+
+      },
+      total: 0,
     }
   },
   mounted() {
     this.getData()
   },
   methods: {
-    // 格式化产品类型
+    handleSizeChange(val) {
+      this.pageQuery.size = val;
+      this.getData();
+    },
+    handleCurrentChange(val) {
+      this.pageQuery.page = val;
+      this.getData();
+    },
+    // 格式化产品类型`
     thinkTypeFormatter(row) {
       for (let index in this.thinkTypeOptions) {
         if (this.thinkTypeOptions[index].pkId === row.thinkTypeId) {
@@ -123,8 +141,9 @@ export default {
       });
     },
     getData() {
-      this.http.get(this.api.thinkBaseInfo.list, res => {
+      this.http.post(this.api.thinkBaseInfo.pageList,this.pageQuery, res => {
         this.tableData = res.data;
+        this.total = res.total;
       }, (error) => {
         console.log(error)
       })

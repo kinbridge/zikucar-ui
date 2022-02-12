@@ -9,7 +9,7 @@
     <div>
       <el-form ref="thinkTypeForm" :model="thinkTypeForm" :rules="rules" label-width="80px">
         <el-form-item label="产品编码" prop="thinkTypeName">
-          <el-input v-model="thinkTypeForm.thinkCode" placeholder="请输入产品编码-中文字母大写"
+          <el-input v-model="thinkTypeForm.thinkCode" placeholder="请输入产品编码-拼音字母大写"
                     prefix-icon="fa fa-thinkType"></el-input>
         </el-form-item>
         <el-form-item label="产品类型" prop="thinkTypeCode">

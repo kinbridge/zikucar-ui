@@ -7,10 +7,11 @@
             <el-col :span="24" style="padding: 15px; ">
               <el-row :gutter="20" style="background: #f4f4f5;padding:10px;">
                 <el-col :span="5">
-                  <el-input placeholder="部门名称" v-model="searArgs.checkName" size="small" clearable></el-input>
+                  <el-input placeholder="部门名称" v-model="pageQuery.sysDept.deptName"
+                            v-on:keyup.enter.native="getData"  size="small" clearable></el-input>
                 </el-col>
                 <el-col :span="2" style="text-align: center;">
-                  <el-button type="success" icon="el-icon-search" size="small" circle></el-button>
+                  <el-button type="success" @click="getData" icon="el-icon-search" size="small" circle></el-button>
                 </el-col>
               </el-row>
             </el-col>
@@ -45,6 +46,15 @@
     <!--    编辑框-->
     <dept-edit :dialogVisible="dialogVisible" v-if="dialogVisible" :params="params"
                @dept-edit-close="deptEditClose"></dept-edit>
+
+    <!--    分页组件-->
+    <el-pagination @size-change="handleSizeChange"
+                   @current-change="handleCurrentChange"
+                   layout="total, sizes, prev, pager, next, jumper"
+                   :page-sizes="[10,20,100, 200, 300, 400]"
+                   :page-size="pageQuery.size"
+                   :current-page="pageQuery.page"
+                   :total="total"></el-pagination>
   </div>
 
 </template>
@@ -61,12 +71,29 @@ export default {
       },
       tableData: [],
       dialogVisible: false,//显示编辑框
+      pageQuery: {
+        page: 1,
+        size: 10,
+        sysDept: {
+          deptName: ""
+        }
+
+      },
+      total: 0,
     }
   },
   mounted() {
     this.getData()
   },
   methods: {
+    handleSizeChange(val) {
+      this.pageQuery.size = val;
+      this.getData();
+    },
+    handleCurrentChange(val) {
+      this.pageQuery.page = val;
+      this.getData();
+    },
     deptEditClose() {
       this.dialogVisible = false;
       this.getData();
@@ -100,8 +127,9 @@ export default {
       });
     },
     getData() {
-      this.http.get(this.api.dept.list, res => {
+      this.http.post(this.api.dept.pageList, this.pageQuery,res => {
         this.tableData = res.data;
+        this.total = res.total;
       }, (error) => {
         console.log(error)
       })

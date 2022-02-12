@@ -12,8 +12,8 @@
           <el-input v-model="form.username" placeholder="请输入用户名" prefix-icon="fa fa-user"
                     :disabled="params.operation==='修改'"></el-input>
         </el-form-item>
-        <el-form-item label="用户" prop="deptId">
-          <el-select v-model="form.deptId"  placeholder="请选择用户" style="width: 100%">
+        <el-form-item label="部门" prop="deptId">
+          <el-select v-model="form.deptId"  placeholder="请选择部门" style="width: 100%">
             <el-option v-for="item in deptOptions"
                        :key="item.deptName" :label="item.deptName" :value="item.pkId">
             </el-option>
@@ -99,6 +99,7 @@ export default {
         status: 'N',
       },
       deptOptions: [],
+      positionOptionsList: [],
       positionOptions: [],
       loading: false,
       title: "用户" + this.params.operation,
@@ -153,19 +154,21 @@ export default {
     initUser() {
       this.http.get(this.api.user.getById + "/" + this.params.pkId, res => {
         this.form = res.data;
+        this.form.pwd = "";
       }, (error) => {
-        console.log("查询岗位信息错误-》" + error);
+        console.log("查询用户信息错误-》" + error);
       })
     },
     initDeptList() {
       this.http.get(this.api.dept.list, res => {
         this.deptOptions = res.data;
       }, (error) => {
-        console.log("查询岗位信息错误-》" + error);
+        console.log("查询部门信息错误-》" + error);
       })
     },
     initPositionList() {
       this.http.get(this.api.position.list, res => {
+        this.positionOptionsList = res.data;
         this.positionOptions = res.data;
       }, (error) => {
         console.log("查询岗位信息错误-》" + error);
@@ -179,9 +182,9 @@ export default {
           this.$emit("user-edit-close");
           return true;
         }
-        this.$message({message: this.params.operation + '失败！', type: 'error'});
+        this.$message({message: res.message + '，修改失败！', type: 'error'});
       }, (error) => {
-        console.log("查询岗位信息错误-》" + error);
+        console.log("edit用户信息错误-》" + error);
       })
     },
     handleClose() {

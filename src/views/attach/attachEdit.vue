@@ -7,17 +7,21 @@
       :append-to-body="true"
       :before-close="handleClose">
     <div>
-      <el-form ref="attachForm" :model="attachForm" :rules="rules">
-        <el-select v-model="attachForm.thinkTypeId" placeholder="请选择类型" style="width: 100%">
-          <el-option v-for="item in thinkTypeOptions"
-                     :key="item.thinkType" :label="item.thinkType" :value="item.pkId">
-          </el-option>
-        </el-select>
-        <el-select v-model="attachForm.thinkBaseInfoId" placeholder="请选择产品" style="width: 100%">
-          <el-option v-for="item in thinkBaseInfoOptions"
-                     :key="item.thinkName" :label="item.thinkName" :value="item.pkId">
-          </el-option>
-        </el-select>
+      <el-form ref="attachForm" :model="attachForm" :rules="rules" label-width="80px">
+        <el-form-item label="类型" prop="thinkTypeId">
+          <el-select v-model="attachForm.thinkTypeId" placeholder="请选择类型" style="width: 100%">
+            <el-option v-for="item in thinkTypeOptions"
+                       :key="item.thinkType" :label="item.thinkType" :value="item.pkId">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="产品" prop="thinkBaseInfoId">
+          <el-select v-model="attachForm.thinkBaseInfoId" placeholder="请选择产品" style="width: 100%">
+            <el-option v-for="item in thinkBaseInfoOptions"
+                       :key="item.thinkName" :label="item.thinkName" :value="item.pkId">
+            </el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item style="text-align: right;">
           <el-button @click="handleClose">取 消</el-button>
           <el-button @click="submitForm('attachForm')" type="primary">确定

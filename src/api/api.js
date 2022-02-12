@@ -4,7 +4,7 @@ export default {
         register: baseUrl + 'user/register',
         login: baseUrl + 'user/login',
         list: baseUrl + 'user/list',
-        page: baseUrl + 'user/page',
+        pageList: baseUrl + 'user/pageList',
         getById: baseUrl + 'user/getById',
         edit: baseUrl + 'user/edit',
         editUserStatus: baseUrl + 'user/editUserStatus'
@@ -12,7 +12,6 @@ export default {
     attach: {
         list: baseUrl + 'attach/list',
         pageList: baseUrl + 'attach/pageList',
-        page: baseUrl + 'attach/page',
         getById: baseUrl + 'attach/getById',
         add: baseUrl + 'attach/add',
         update: baseUrl + 'attach/update',
@@ -21,7 +20,7 @@ export default {
     },
     dept: {
         list: baseUrl + 'dept/list',
-        page: baseUrl + 'dept/page',
+        pageList: baseUrl + 'dept/pageList',
         getById: baseUrl + 'dept/getById',
         add: baseUrl + 'dept/add',
         update: baseUrl + 'dept/update',
@@ -29,7 +28,7 @@ export default {
     },
     position: {
         list: baseUrl + 'position/list',
-        page: baseUrl + 'position/page',
+        pageList: baseUrl + 'position/pageList',
         getById: baseUrl + 'position/getById',
         add: baseUrl + 'position/add',
         update: baseUrl + 'position/update',
@@ -37,7 +36,7 @@ export default {
     },
     thinkBaseInfo: {
         list: baseUrl + 'thinkBaseInfo/list',
-        page: baseUrl + 'thinkBaseInfo/page',
+        pageList: baseUrl + 'thinkBaseInfo/pageList',
         getById: baseUrl + 'thinkBaseInfo/getById',
         add: baseUrl + 'thinkBaseInfo/add',
         update: baseUrl + 'thinkBaseInfo/update',
@@ -45,7 +44,7 @@ export default {
     },
     thinkType: {
         list: baseUrl + 'thinkType/list',
-        page: baseUrl + 'thinkType/page',
+        pageList: baseUrl + 'thinkType/pageList',
         getById: baseUrl + 'thinkType/getById',
         add: baseUrl + 'thinkType/add',
         update: baseUrl + 'thinkType/update',

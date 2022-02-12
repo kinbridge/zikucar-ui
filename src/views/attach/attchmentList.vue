@@ -8,7 +8,7 @@
               <el-row :gutter="20" style="background: #f4f4f5;padding:10px;">
                 <el-col :span="5">
                   <el-input placeholder="文件名称" v-model="pageQuery.attachment.originName" size="small"
-                            clearable></el-input>
+                            v-on:keyup.enter.native="getData" clearable></el-input>
                 </el-col>
                 <el-col :span="2" style="text-align: center;">
                   <el-button type="success" @click="getData" icon="el-icon-search" size="small" circle></el-button>
