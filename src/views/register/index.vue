@@ -6,40 +6,40 @@
         <div class="triangle"></div>
       </div>
       <el-card class="box-card register-card">
-        <el-form ref="form" :model="form" :rules="rules">
-          <el-form-item prop="username">
+        <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+          <el-form-item label="用户名" prop="username">
             <el-input v-model="form.username" placeholder="请输入用户名" prefix-icon="fa fa-user" ></el-input>
           </el-form-item>
-          <el-form-item prop="deptId">
+          <el-form-item label="部门" prop="deptId">
             <el-select v-model="form.deptId" placeholder="请选择部门" style="width: 100%">
               <el-option v-for="item in deptOptions"
                          :key="item.deptName" :label="item.deptName" :value="item.pkId">
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item prop="positionId">
+          <el-form-item label="岗位" prop="positionId">
             <el-select v-model="form.positionId" placeholder="请选择岗位" style="width: 100%">
               <el-option v-for="item in positionOptions"
                          :key="item.positionName" :label="item.positionName" :value="item.pkId">
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item prop="phone">
+          <el-form-item label="手机号" prop="phone">
             <el-input v-model="form.phone" placeholder="请输入手机号" prefix-icon="fa fa-phone"></el-input>
           </el-form-item>
-          <el-form-item prop="age">
+          <el-form-item label="年龄" prop="age">
             <el-input v-model.number="form.age" placeholder="请输入年龄" ></el-input>
           </el-form-item>
-          <el-form-item prop="email">
+          <el-form-item label="邮箱" prop="email">
             <el-input v-model="form.email" placeholder="请输入邮箱" ></el-input>
           </el-form-item>
-          <el-form-item prop="pwd">
+          <el-form-item label="密码" prop="pwd">
             <el-input v-model="form.pwd" type="password" placeholder="请输入密码" prefix-icon="fa fa-lock"></el-input>
           </el-form-item>
-          <el-form-item prop="pwd2">
+          <el-form-item label="确认密码" prop="pwd2">
             <el-input v-model="form.pwd2" type="password" placeholder="请确认密码" prefix-icon="fa fa-lock"></el-input>
           </el-form-item>
-          <el-form-item style="text-align: center;">
+          <el-form-item label="" style="text-align: center;">
             <el-button @click="toLogin"  >返回登录</el-button>
             <el-button @click="submitForm('form')" type="primary">提交注册
             </el-button>
@@ -198,7 +198,7 @@ export default {
   margin: 20px 0;
   padding: 10px;
   margin-left: -30px;
-  width: 350px;
+  width: 400px;
 }
 
 .triangle {
