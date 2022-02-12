@@ -7,21 +7,21 @@
       :append-to-body="true"
       :before-close="handleClose">
     <div>
-      <el-form ref="positionForm" :model="positionForm" :rules="rules">
-        <el-form-item prop="deptId">
+      <el-form ref="positionForm" :model="positionForm" :rules="rules" label-width="80px">
+        <el-form-item label="部门" prop="deptId">
           <el-select v-model="positionForm.deptId" placeholder="请选择部门" style="width: 100%">
             <el-option v-for="item in deptOptions"
                        :key="item.deptName" :label="item.deptName" :value="item.pkId">
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item prop="positionName">
+        <el-form-item label="岗位名称" prop="positionName">
           <el-input v-model="positionForm.positionName" placeholder="请输入岗位名称"></el-input>
         </el-form-item>
-        <el-form-item prop="positionCode">
+        <el-form-item label="岗位编码" prop="positionCode">
           <el-input v-model="positionForm.positionCode" placeholder="请输入岗位编码" ></el-input>
         </el-form-item>
-        <el-form-item prop="remark">
+        <el-form-item label="描述" prop="remark">
           <el-input type="textarea" v-model="positionForm.remark" placeholder="请输入描述"
                     prefix-icon="fa fa-position"></el-input>
         </el-form-item>

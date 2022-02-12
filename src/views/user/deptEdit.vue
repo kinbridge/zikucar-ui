@@ -7,14 +7,14 @@
       :append-to-body="true"
       :before-close="handleClose">
     <div>
-      <el-form ref="deptForm" :model="deptForm" :rules="rules">
-        <el-form-item prop="deptName">
-          <el-input v-model="deptForm.deptName" placeholder="请输入岗位名称" prefix-icon="fa fa-dept"></el-input>
+      <el-form ref="deptForm" :model="deptForm" :rules="rules" label-width="80px">
+        <el-form-item label="部门名称" prop="deptName">
+          <el-input v-model="deptForm.deptName" placeholder="请输入部门名称" prefix-icon="fa fa-dept"></el-input>
         </el-form-item>
-        <el-form-item prop="deptCode">
-          <el-input v-model="deptForm.deptCode" placeholder="请输入岗位编码" prefix-icon="fa fa-dept"></el-input>
+        <el-form-item label="部门编码" prop="deptCode">
+          <el-input v-model="deptForm.deptCode" placeholder="请输入部门编码" prefix-icon="fa fa-dept"></el-input>
         </el-form-item>
-        <el-form-item prop="remark">
+        <el-form-item label="描述" prop="remark">
           <el-input type="textarea" v-model="deptForm.remark" placeholder="请输入描述"
                     prefix-icon="fa fa-dept"></el-input>
         </el-form-item>
@@ -75,7 +75,7 @@ export default {
       this.http.get(this.api.dept.getById + "/" + this.params.pkId, res => {
         this.deptForm = res.data;
       }, (error) => {
-        console.log("查询岗位信息错误-》" + error);
+        console.log("查询部门信息错误-》" + error);
       })
     },
     edit() {
@@ -93,7 +93,7 @@ export default {
         }
         this.$message({message: msg + '失败！', type: 'error'});
       }, (error) => {
-        console.log("查询岗位信息错误-》" + error);
+        console.log("查询部门信息错误-》" + error);
       })
     }
   }

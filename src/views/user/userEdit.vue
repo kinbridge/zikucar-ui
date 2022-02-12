@@ -6,49 +6,50 @@
       width="30%"
       :append-to-body="true"
       :before-close="handleClose">
-  <div>
-        <el-form ref="form" :model="form" :rules="rules">
-          <el-form-item prop="username">
-            <el-input v-model="form.username" placeholder="请输入用户名" prefix-icon="fa fa-user" :disabled="params.operation==='修改'" ></el-input>
-          </el-form-item>
-          <el-form-item prop="deptId">
-            <el-select v-model="form.deptId" placeholder="请选择用户" style="width: 100%">
-              <el-option v-for="item in deptOptions"
-                         :key="item.deptName" :label="item.deptName" :value="item.pkId">
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item prop="positionId">
-            <el-select v-model="form.positionId" placeholder="请选择岗位" style="width: 100%">
-              <el-option v-for="item in positionOptions"
-                         :key="item.positionName" :label="item.positionName" :value="item.pkId">
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item prop="phone">
-            <el-input v-model="form.phone" placeholder="请输入手机号" prefix-icon="fa fa-phone"></el-input>
-          </el-form-item>
-          <el-form-item prop="age">
-            <el-input v-model.number="form.age" placeholder="请输入年龄" ></el-input>
-          </el-form-item>
-          <el-form-item prop="email">
-            <el-input v-model="form.email" placeholder="请输入邮箱" ></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-input v-model="form.pwd" type="password" placeholder="请输入旧密码" prefix-icon="fa fa-lock"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-input v-model="form.pwdNew" type="password" placeholder="请输入新密码" prefix-icon="fa fa-lock"></el-input>
-          </el-form-item>
-          <el-form-item prop="pwd2">
-            <el-input v-model="form.pwd2" type="password" placeholder="请确认新密码" prefix-icon="fa fa-lock"></el-input>
-          </el-form-item>
-          <el-form-item style="text-align: center;">
-            <el-button @click="handleClose"  >取消</el-button>
-            <el-button @click="submitForm('form')" type="primary">确定
-            </el-button>
-          </el-form-item>
-        </el-form>
+    <div>
+      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="form.username" placeholder="请输入用户名" prefix-icon="fa fa-user"
+                    :disabled="params.operation==='修改'"></el-input>
+        </el-form-item>
+        <el-form-item label="用户" prop="deptId">
+          <el-select v-model="form.deptId"  placeholder="请选择用户" style="width: 100%">
+            <el-option v-for="item in deptOptions"
+                       :key="item.deptName" :label="item.deptName" :value="item.pkId">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="岗位" prop="positionId">
+          <el-select v-model="form.positionId"  placeholder="请选择岗位" style="width: 100%">
+            <el-option v-for="item in positionOptions"
+                       :key="item.positionName" :label="item.positionName" :value="item.pkId">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="手机号" prop="phone">
+          <el-input v-model="form.phone" placeholder="请输入手机号" prefix-icon="fa fa-phone"></el-input>
+        </el-form-item>
+        <el-form-item label="年龄" prop="age">
+          <el-input v-model.number="form.age" placeholder="请输入年龄"></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="form.email" placeholder="请输入邮箱"></el-input>
+        </el-form-item>
+        <el-form-item label="旧密码">
+          <el-input v-model="form.pwd" type="password" placeholder="请输入旧密码" prefix-icon="fa fa-lock"></el-input>
+        </el-form-item >
+        <el-form-item label="新密码">
+          <el-input v-model="form.pwdNew" type="password" placeholder="请输入新密码" prefix-icon="fa fa-lock"></el-input>
+        </el-form-item>
+        <el-form-item  label="确认新密码" prop="pwd2">
+          <el-input v-model="form.pwd2" type="password" placeholder="请确认新密码" prefix-icon="fa fa-lock"></el-input>
+        </el-form-item>
+        <el-form-item style="text-align: center;">
+          <el-button @click="handleClose">取消</el-button>
+          <el-button @click="submitForm('form')" type="primary">确定
+          </el-button>
+        </el-form-item>
+      </el-form>
     </div>
   </el-dialog>
 </template>
@@ -57,7 +58,7 @@ export default {
   props: {dialogVisible: Boolean, params: Object},
   data() {
     let validatePass2 = (rule, value, callback) => {
-      if(!this.form.pwdNew){
+      if (!this.form.pwdNew) {
         callback();
       }
       if (value === '') {
@@ -84,13 +85,13 @@ export default {
     };
     return {
       form: {
-        pkId:'',
+        pkId: '',
         deptId: '',
         positionId: '',
         uin: '',
         username: '',
         pwd: '',
-        pwdNew:'',
+        pwdNew: '',
         pwd2: '',
         age: '',
         email: '',
@@ -100,38 +101,38 @@ export default {
       deptOptions: [],
       positionOptions: [],
       loading: false,
-      title:"用户"+this.params.operation,
+      title: "用户" + this.params.operation,
       rules: {
         username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 2, message: '最少输入2个字符', trigger: 'blur' }
+          {required: true, message: '请输入用户名', trigger: 'blur'},
+          {min: 2, message: '最少输入2个字符', trigger: 'blur'}
         ],
         deptId: [
-          { required: true, message: '请选择用户', trigger: 'change' }
+          {required: true, message: '请选择用户', trigger: 'change'}
         ],
         positionId: [
-          { required: true, message: '请选择岗位', trigger: 'change' }
+          {required: true, message: '请选择岗位', trigger: 'change'}
         ],
         age: [
-          { validator: checkAge, trigger: 'blur' }
+          {validator: checkAge, trigger: 'blur'}
         ],
         phone: [
-          { required: true, message: '请输入手机号', trigger: 'blur' },
-          { min: 11, message: '请输入11个字符', trigger: 'blur' },
-          { max: 11, message: '请输入11个字符', trigger: 'blur' },
+          {required: true, message: '请输入手机号', trigger: 'blur'},
+          {min: 11, message: '请输入11个字符', trigger: 'blur'},
+          {max: 11, message: '请输入11个字符', trigger: 'blur'},
         ],
-        email:[
-          { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-          { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+        email: [
+          {required: true, message: '请输入邮箱地址', trigger: 'blur'},
+          {type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
         ],
         pwd2: [
-          { validator: validatePass2, trigger: 'blur' }
+          {validator: validatePass2, trigger: 'blur'}
         ]
       }
     }
   },
   mounted() {
-    if(this.params.pkId){
+    if (this.params.pkId) {
       this.initUser();
     }
     this.initPositionList();
@@ -149,38 +150,38 @@ export default {
         }
       });
     },
-    initUser(){
-      this.http.get(this.api.user.getById+"/"+this.params.pkId,res=>{
+    initUser() {
+      this.http.get(this.api.user.getById + "/" + this.params.pkId, res => {
         this.form = res.data;
-      },(error)=>{
-        console.log("查询岗位信息错误-》"+error);
+      }, (error) => {
+        console.log("查询岗位信息错误-》" + error);
       })
     },
     initDeptList() {
-      this.http.get(this.api.dept.list,res=>{
+      this.http.get(this.api.dept.list, res => {
         this.deptOptions = res.data;
-      },(error)=>{
-        console.log("查询岗位信息错误-》"+error);
+      }, (error) => {
+        console.log("查询岗位信息错误-》" + error);
       })
     },
     initPositionList() {
-      this.http.get(this.api.position.list,res=>{
+      this.http.get(this.api.position.list, res => {
         this.positionOptions = res.data;
-      },(error)=>{
-        console.log("查询岗位信息错误-》"+error);
+      }, (error) => {
+        console.log("查询岗位信息错误-》" + error);
       })
     },
     edit() {
       this.form.pkId = this.params.pkId;
-      this.http.post(this.api.user.edit,this.form,res=>{
-        if(res.code == 200){
-          this.$message({message: this.params.operation+'成功！',type: 'success'});
+      this.http.post(this.api.user.edit, this.form, res => {
+        if (res.code == 200) {
+          this.$message({message: this.params.operation + '成功！', type: 'success'});
           this.$emit("user-edit-close");
           return true;
         }
-        this.$message({message: this.params.operation+'失败！', type: 'error'});
-      },(error)=>{
-        console.log("查询岗位信息错误-》"+error);
+        this.$message({message: this.params.operation + '失败！', type: 'error'});
+      }, (error) => {
+        console.log("查询岗位信息错误-》" + error);
       })
     },
     handleClose() {

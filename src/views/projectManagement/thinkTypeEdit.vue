@@ -7,16 +7,16 @@
       :append-to-body="true"
       :before-close="handleClose">
     <div>
-      <el-form ref="thinkTypeForm" :model="thinkTypeForm" :rules="rules">
-        <el-form-item prop="thinkTypeName">
+      <el-form ref="thinkTypeForm" :model="thinkTypeForm" :rules="rules" label-width="80px">
+        <el-form-item label="产品编码" prop="thinkTypeName">
           <el-input v-model="thinkTypeForm.thinkCode" placeholder="请输入产品编码-中文字母大写"
                     prefix-icon="fa fa-thinkType"></el-input>
         </el-form-item>
-        <el-form-item prop="thinkTypeCode">
+        <el-form-item label="产品类型" prop="thinkTypeCode">
           <el-input v-model="thinkTypeForm.thinkType" placeholder="请输入产品类型"
                     prefix-icon="fa fa-thinkType"></el-input>
         </el-form-item>
-        <el-form-item style="text-align: right;">
+        <el-form-item label="" style="text-align: right;">
           <el-button @click="handleClose">取 消</el-button>
           <el-button @click="submitForm('thinkTypeForm')" type="primary">确定
           </el-button>
