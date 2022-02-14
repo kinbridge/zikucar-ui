@@ -51,6 +51,14 @@
     <!--    编辑框-->
     <thinkBaseInfo-edit :dialogVisible="dialogVisible" v-if="dialogVisible" :params="params"
                         @thinkBaseInfo-edit-close="thinkBaseInfoEditClose"></thinkBaseInfo-edit>
+    <!--    分页组件-->
+    <el-pagination @size-change="handleSizeChange"
+                   @current-change="handleCurrentChange"
+                   layout="total, sizes, prev, pager, next, jumper"
+                   :page-sizes="[10,20,100, 200, 300, 400]"
+                   :page-size="pageQuery.size"
+                   :current-page="pageQuery.page"
+                   :total="total"></el-pagination>
   </div>
 
 </template>
