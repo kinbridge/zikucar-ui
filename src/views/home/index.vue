@@ -31,7 +31,7 @@
             TopMenu
         },
         created() {
-          this.$router.push({path:"/home/deptList"})
+          this.$router.push({path:"/home/homePageEchart"})
         }
     }
 </script>

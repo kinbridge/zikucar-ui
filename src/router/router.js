@@ -4,7 +4,11 @@ import login from '@/views/login/index.vue'
 import register from '@/views/register/index.vue'
 import home from '@/views/home/index.vue'
 import error404 from '@/views/404/index.vue'
+// 网站首页
 import homePage from '@/views/home/homePage.vue'
+// 网站统计
+import homePageEchart from '@/views/home/homePageEchart.vue'
+
 
 // 用户管理
 import userList from '@/views/user/userList.vue'
@@ -20,7 +24,10 @@ import projectType from '@/views/projectManagement/thinkTypeList.vue'
 
 Vue.use(Router)
 
+// 添加这下面一段代码，就可以解决报错
+
 export default new Router({
+
     mode: 'history',
     routes: [
         {
@@ -58,7 +65,7 @@ export default new Router({
         },
         {
             path: "/home",
-            redirect: '/home/deptList',
+            redirect: '/home/homePageEchart',
             hidden: true
         },
         {
@@ -66,6 +73,12 @@ export default new Router({
             name: 'home',
             component: home,
             children: [
+                {
+                    path: 'homePageEchart',
+                    name: 'homePageEchart',
+                    component: homePageEchart,
+                    meta: {title: '网站访问', icon: 'fa fa-user'}
+                },
                 {
                     path: 'deptList',
                     name: 'deptList',
@@ -106,3 +119,8 @@ export default new Router({
         }
     ]
 })
+
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => err)
+};

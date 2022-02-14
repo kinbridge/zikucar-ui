@@ -105,7 +105,7 @@ export default {
             if (res.code == 200) {
               setTimeout(() => {
                 this.$message({message: '登录成功！', type: 'success'});
-                this.$router.push({path: "/home/deptList"});
+                this.$router.push({path: "/home/homePageEchart"});
               }, 1000);
             }else{
               this.$message({message: '登录失败！'+res.message, type: 'error'});

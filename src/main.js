@@ -8,6 +8,8 @@ import http from './api/http.js'
 import api from './api/api'
 import 'element-ui/lib/theme-chalk/index.css';
 import "font-awesome/css/font-awesome.css";
+// 引入echarts
+import * as echarts from 'echarts';
 
 Vue.use(ElementUI);
 Vue.use(Router);
@@ -15,6 +17,8 @@ Vue.use(Router);
 Vue.config.productionTip = false
 Vue.prototype.http = http
 Vue.prototype.api = api
+Vue.prototype.$echarts = echarts
+
 
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
