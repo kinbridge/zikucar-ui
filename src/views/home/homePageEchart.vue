@@ -4,19 +4,19 @@
       <el-col :span="8">
         <div id="pv">
           <h3 style="color: #3366cc;text-align: center">今日访问量（pv）</h3>
-          <div style="text-align: center">{{pv}}</div>
+          <div style="text-align: center">{{websiteNow.pv}}</div>
         </div>
       </el-col>
       <el-col :span="8">
         <div id="ip">
           <h3 style="color: #3366cc;text-align: center">今日独立IP</h3>
-          <div style="text-align: center">{{ip}}</div>
+          <div style="text-align: center">{{websiteNow.ip}}</div>
         </div>
       </el-col>
       <el-col :span="8" >
         <div id="uv">
           <h3 style="color: #3366cc;text-align: center">今日用户量（uv）</h3>
-          <div style="text-align: center">{{uv}}</div>
+          <div style="text-align: center">{{websiteNow.uv}}</div>
         </div>
       </el-col>
     </el-row>
@@ -42,24 +42,139 @@ export default {
       pv:3,
       ip:5,
       uv:4,
+      dateStr: "2022-02-15",
+      websiteList:[],
+      websiteNow:Object
     }
   },
   mounted() {
-    this.drawLine();
+
+    this.initData();
+    // this.drawLine();
   },
   methods: {
+    initData(){
+      this.http.get(this.api.website.queryWebsiteNum,res=>{
+        let  that = this;
+        that.websiteList = res.data;
+        that.websiteNow = res.data[0];
+        let dateArr = [];
+        let uvArr = [];
+        let pvArr = [];
+        let ipArr = [];
+        for(let index in that.websiteList ){
+          dateArr.push(that.websiteList[res.data.length-index-1].dateStr);
+          uvArr.push(that.websiteList[res.data.length-index-1].uv);
+          pvArr.push(that.websiteList[res.data.length-index-1].pv);
+          ipArr.push(that.websiteList[res.data.length-index-1].ip);
+        }
+        // 基于准备好的dom，初始化echarts实例
+        let myChart = that.$echarts.init(document.getElementById('myChart'))
+        let option = {
+          title: {
+            text: '每周统计'
+          },
+          tooltip: {
+            trigger: 'axis'
+          },
+          legend: {
+            data: ['访问量', '独立IP', '用户量']
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: dateArr
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [
+            {
+              name: '访问量',
+              type: 'line',
+              stack: 'Total',
+              data: pvArr
+            },
+            {
+              name: '独立IP',
+              type: 'line',
+              stack: 'Total',
+              data: ipArr
+            },
+            {
+              name: '用户量',
+              type: 'line',
+              stack: 'Total',
+              data: uvArr
+            },
+          ]
+        };
+        // 绘制图表
+        myChart.setOption(option);
+
+        let myChart2 = that.$echarts.init(document.getElementById('myChart2'))
+        let option2 = {
+          title: {
+            text: '访问总量',
+            subtext: 'Fake Data',
+            left: 'center'
+          },
+          tooltip: {
+            trigger: 'item'
+          },
+          legend: {
+            orient: 'vertical',
+            left: 'left'
+          },
+          series: [
+            {
+              name: '访问量',
+              type: 'pie',
+              radius: '50%',
+              data: [
+                {value: that.websiteList[0].pv, name: '访问量'},
+                {value: that.websiteList[0].ip, name: '独立IP'},
+                {value: that.websiteList[0].uv, name: '用户量'}
+              ],
+              emphasis: {
+                itemStyle: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
+            }
+          ]
+        };
+        myChart2.setOption(option2);
+
+      },(error)=>{
+        console.log("查询岗位信息错误-》"+error);
+      })
+    },
     drawLine() {
       // 基于准备好的dom，初始化echarts实例
       let myChart = this.$echarts.init(document.getElementById('myChart'))
       let option = {
         title: {
-          text: 'Stacked Line'
+          text: '每周统计'
         },
         tooltip: {
           trigger: 'axis'
         },
         legend: {
-          data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+          data: ['访问量', '独立IP', '用户量']
         },
         grid: {
           left: '3%',
@@ -75,42 +190,30 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          data: ['2022/01/01', '2022/01/02', '2022/01/03', '2022/01/04', '2022/01/05', '2022/01/06', '2022/01/07']
         },
         yAxis: {
           type: 'value'
         },
         series: [
           {
-            name: 'Email',
+            name: '访问量',
             type: 'line',
             stack: 'Total',
             data: [120, 132, 101, 134, 90, 230, 210]
           },
           {
-            name: 'Union Ads',
+            name: '独立IP',
             type: 'line',
             stack: 'Total',
             data: [220, 182, 191, 234, 290, 330, 310]
           },
           {
-            name: 'Video Ads',
+            name: '用户量',
             type: 'line',
             stack: 'Total',
             data: [150, 232, 201, 154, 190, 330, 410]
           },
-          {
-            name: 'Direct',
-            type: 'line',
-            stack: 'Total',
-            data: [320, 332, 301, 334, 390, 330, 320]
-          },
-          {
-            name: 'Search Engine',
-            type: 'line',
-            stack: 'Total',
-            data: [820, 932, 901, 934, 1290, 1330, 1320]
-          }
         ]
       };
       // 绘制图表
@@ -119,7 +222,7 @@ export default {
       let myChart2 = this.$echarts.init(document.getElementById('myChart2'))
       let option2 = {
         title: {
-          text: 'Referer of a Website',
+          text: '访问总量',
           subtext: 'Fake Data',
           left: 'center'
         },
@@ -132,15 +235,13 @@ export default {
         },
         series: [
           {
-            name: 'Access From',
+            name: '访问量',
             type: 'pie',
             radius: '50%',
             data: [
-              {value: 1048, name: 'Search Engine'},
-              {value: 735, name: 'Direct'},
-              {value: 580, name: 'Email'},
-              {value: 484, name: 'Union Ads'},
-              {value: 300, name: 'Video Ads'}
+              {value: 580, name: '访问量'},
+              {value: 484, name: '独立IP'},
+              {value: 300, name: '用户量'}
             ],
             emphasis: {
               itemStyle: {
@@ -153,6 +254,13 @@ export default {
         ]
       };
       myChart2.setOption(option2);
+    },
+    queryWebsiteNum(){
+      this.http.get(this.api.dept.list,res=>{
+        this.websiteList = res.data;
+      },(error)=>{
+        console.log("查询岗位信息错误-》"+error);
+      })
     }
   }
 }

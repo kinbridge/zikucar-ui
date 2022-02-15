@@ -77,7 +77,7 @@ export default new Router({
                     path: 'homePageEchart',
                     name: 'homePageEchart',
                     component: homePageEchart,
-                    meta: {title: '网站访问', icon: 'fa fa-user'}
+                    meta: {title: '网站访问', icon: 'fa fa-line-chart'}
                 },
                 {
                     path: 'deptList',

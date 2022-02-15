@@ -49,5 +49,9 @@ export default {
         add: baseUrl + 'thinkType/add',
         update: baseUrl + 'thinkType/update',
         deleteById: baseUrl + 'thinkType/deleteById'
+    },
+    website: {
+        queryWebsiteNum: baseUrl + 'website/queryWebsiteNum',
     }
+
 }
